@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
+
 export const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
@@ -7,7 +8,6 @@ const AppProvider = ({ children }) => {
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [img, setImg] = useState("");
-  const [fav, setFav] = useState(false);
 
   const posted = () => {
     let posts = localStorage.getItem("posts");
@@ -19,13 +19,27 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const [favorites, setFavorites] = useState([]);
+  const favoritePost = () => {
+    let favs = localStorage.getItem("favs");
+
+    if (favs) {
+     return  JSON.parse(localStorage.getItem("favs"));
+    } else {
+      return [];
+    }
+  };
+
+  const [favorites, setFavorites] = useState(favoritePost);
 
   const [post, setPost] = useState(posted);
 
   useEffect(() => {
     localStorage.setItem("posts", JSON.stringify(post));
   }, [post]);
+
+  useEffect(() => {
+    localStorage.setItem("favs", JSON.stringify(favorites));
+  }, [favorites]);
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -51,9 +65,17 @@ const AppProvider = ({ children }) => {
     setPost(filter);
   };
 
-  const handleFav = (post) => {
-    setFavorites([...favorites, post]);
-    setFav(!fav)
+  const handleFav = (id) => {
+    const existingFavorite = favorites.find((favorite) => favorite.id === id);
+
+    if (existingFavorite) {
+      // Remove from favorites
+      setFavorites(favorites.filter((favorite) => favorite.id !== id));
+    } else {
+      // Add to favorites
+      const favoritePost = post.find((item) => item.id === id);
+      setFavorites([...favorites, favoritePost]);
+    }
   };
 
   return (
@@ -70,8 +92,7 @@ const AppProvider = ({ children }) => {
         img,
         setImg,
         handleDelete,
-        fav,
-        setFav,
+
         handleFav,
         favorites,
         setFavorites,
