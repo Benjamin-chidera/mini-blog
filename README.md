@@ -62,16 +62,23 @@ Usage
   <li> video url : https://vimeo.com/897553113/2972371361?share=copy</li>
 </ul>
 
-️## Tech Stack
-React JS
-Tailwind CSS
+#  Tech Stack  
+<ul>
+    <li>React JS
+</li>
+    <li>Tailwind CSS</li>
+</ul>
 
-Contact
-Email: benjaminchidera72@gmail.com
-Phone: +234 904 840 1533
-WhatsApp: +234 904 840 1533
-Contributing
+Contact: 
+
+<ul>
+    <li> Email: benjaminchidera72@gmail.com</li>
+    <li>Phone: +234 904 840 1533</li>
+    <li>WhatsApp: +234 904 840 1533</li>
+</ul>
+
+Contributing: 
 We welcome contributions! Please follow our Contribution Guidelines.
 
-License
+License: 
 This project is licensed under the MIT License - see the LICENSE file for details.
